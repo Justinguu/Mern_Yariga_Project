@@ -31,7 +31,7 @@ const CreateProperty = () => {
   return (
 
   <Form
-  type="create"
+  type="Create"
   register={register}
   onFinish={onFinish}
   formLoading={formLoading}

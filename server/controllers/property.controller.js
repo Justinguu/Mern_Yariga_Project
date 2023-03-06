@@ -96,7 +96,7 @@ const createProperty = async (req, res) => {
 
         user.allProperties.push(newProperty._id);
         await user.save({ session });
-
+  
         await session.commitTransaction();
 
         res.status(200).json({ message: "Property created successfully" });
