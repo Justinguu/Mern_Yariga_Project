@@ -14,40 +14,47 @@ cloudinary.config({
 });
 
 const getAllProperties = async (req, res) => {
-    const {
-        _end,
-        _order,
-        _start,
-        _sort,
-        title_like = "",
-        propertyType = "",
-    } = req.query;
+    try{
+        const properties = await Property.find({}).limit(req.query.end);
 
-    const query = {};
-
-    if (propertyType !== "") {
-        query.propertyType = propertyType;
+        res.status(200).json(properties)
+    } catch (error){
+        res.status(500).json({ message: error.message })
     }
+    // const {
+    //     _end,
+    //     _order,
+    //     _start,
+    //     _sort,
+    //     title_like = "",
+    //     propertyType = "",
+    // } = req.query;
 
-    if (title_like) {
-        query.title = { $regex: title_like, $options: "i" };
-    }
+    // const query = {};
 
-    try {
-        const count = await Property.countDocuments({ query });
+    // if (propertyType !== "") {
+    //     query.propertyType = propertyType;
+    // }
 
-        const properties = await Property.find(query)
-            .limit(_end)
-            .skip(_start)
-            .sort({ [_sort]: _order });
+    // if (title_like) {
+    //     query.title = { $regex: title_like, $options: "i" };
+    // }
 
-        res.header("x-total-count", count);
-        res.header("Access-Control-Expose-Headers", "x-total-count");
+    // try {
+    //     const count = await Property.countDocuments({ query });
 
-        res.status(200).json(properties);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    //     const properties = await Property.find(query)
+    //         .limit(_end)
+    //         .skip(_start)
+    //         .sort({ [_sort]: _order });
+
+    //     res.header("x-total-count", count);
+    //     res.header("Access-Control-Expose-Headers", "x-total-count");
+
+    //     res.status(200).json(properties);
+    // } catch (error) {
+    //     res.status(500).json({ message: error.message });
+    // }
 };
 
 const getPropertyDetail = async (req, res) => {
