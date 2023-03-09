@@ -30,24 +30,27 @@ const PropertyDetails = () => {
     return <div>Error</div>;
   }
 
-  const isCurrentUser = user.email === propertyDetails.creator.email;
+  const isCurrentUser = user.email === propertyDetails.creator.email;  // if user is the same as logged in email
 
   const handleDeleteProperty = () => {
-    const response = confirm("Are you sure you want to delete this property?");
+    const response = confirm(
+        "Are you sure you want to delete this property?",
+    );
     if (response) {
-      mutate(
-        {
-          resource: "properties",
-          id: id as string,
-        },
-        {
-          onSuccess: () => {
-            navigate("/properties");
-          },
-        }
-      );
+        mutate(
+            {
+                resource: "properties",
+                id: id as string,
+            },
+            {
+                onSuccess: () => {
+                    navigate("/properties");
+                },
+            },
+        );
     }
-  };
+};
+
 
   return (
     <Box borderRadius="15px" padding="20px" bgcolor="#FCFCFC" width="fit-content">
@@ -71,8 +74,8 @@ const PropertyDetails = () => {
                 {propertyDetails.propertyType}
               </Typography>
               <Box>
-                {[1, 2, 3, 4, 5].map((item) => (
-                  <Star key={`star-${item}`} sx={{ color: "#F2C94C" }} />
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={`star-${star}`} sx={{ color: "#F2C94C" }} />
                 ))}
               </Box>
             </Stack>

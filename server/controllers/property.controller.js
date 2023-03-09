@@ -157,6 +157,7 @@ const deleteProperty = async (req, res) => {
     }
 };
 
+
 export {
     getAllProperties,
     getPropertyDetail,
