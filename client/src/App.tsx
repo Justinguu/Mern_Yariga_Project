@@ -156,7 +156,7 @@ function App() {
                         //     name: "messages",
                         //     list: Home,
                         //     icon: <ChatBubbleOutline />,
-                        // },
+                        // },  
                         {
                             name: "my-profile",
                             options: { label: "My Profile " },
