@@ -145,7 +145,7 @@ const deleteProperty = async (req, res) => {
         const session = await mongoose.startSession();
         session.startTransaction();
 
-        propertyToDelete.remove({ session });
+        propertyToDelete.deleteOne({ session });
         propertyToDelete.creator.allProperties.pull(propertyToDelete);
 
         await propertyToDelete.creator.save({ session });
